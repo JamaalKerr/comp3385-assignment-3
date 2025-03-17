@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +31,7 @@ Route::post('/login', [AuthController::class, 'store']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::get('/clients/add', [ClientController::class, 'create'])->name('clients.add');
+    Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
+});
