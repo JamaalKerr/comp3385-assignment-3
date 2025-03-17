@@ -23,6 +23,21 @@
                     <a class="nav-link" href="{{ url('/about') }}">About</a>
                 </li>
             </ul>
+            <!-- Add dynamic login/logout links -->
+            <ul class="navbar-nav ms-auto">
+                @auth
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-link nav-link" style="color: white;">Logout</button>
+                        </form>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                @endauth
+            </ul>
         </div>
     </div>
 </nav>
