@@ -28,9 +28,7 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Create additional Routes below
 Route::get('/login', [AuthController::class, 'create'])->name('login'); // Named route for login
 Route::post('/login', [AuthController::class, 'store']);
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::middleware('auth')->group(function () {
     Route::get('/clients/add', [ClientController::class, 'create'])->name('clients.add');
     Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
